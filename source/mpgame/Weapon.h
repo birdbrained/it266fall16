@@ -14,7 +14,7 @@
 ===============================================================================
 */
 
-typedef enum {
+typedef enum { //typedef, create a new type ... enum, create a new value that should not repeat itself
 	WP_READY,
 	WP_OUTOFAMMO,
 	WP_RELOAD,
@@ -24,22 +24,22 @@ typedef enum {
 	WP_FLASHLIGHT,
 } weaponStatus_t;
 
-static const int MAX_WEAPONMODS	= 4;
-static const int MAX_AMMOTYPES	= 16;
+static const int MAX_WEAPONMODS	= 4;  //static, only one instanse of it
+static const int MAX_AMMOTYPES	= 16; //const, value will not change
 
 class idPlayer;
 class idItem;
-class idAnimatedEntity;
+class idAnimatedEntity;  //Hey this exists, dont panic when you see it
 class idProjectile;
 class rvWeapon;
 
 class rvViewWeapon : public idAnimatedEntity {
 public:
 
-	CLASS_PROTOTYPE( rvViewWeapon );
+	CLASS_PROTOTYPE( rvViewWeapon ); //macro, copy and paste function that runs at compile time
 
-							rvViewWeapon( void );
-	virtual					~rvViewWeapon( void );
+							rvViewWeapon( void );  //constructor, has no type
+	virtual					~rvViewWeapon( void ); //destructor, has no type, virtual function is a placeholder
 
 	// Init
 	void					Spawn						( void );
