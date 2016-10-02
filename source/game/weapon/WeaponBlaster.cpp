@@ -427,6 +427,7 @@ stateResult_t rvWeaponBlaster::State_Fire ( const stateParms_t& parms ) {
 
 	
 			if ( gameLocal.time - fireHeldTime > chargeTime ) {	
+				//Blaster fires multiple times
 				Attack ( true, 1, 5, 0, 1.0f );
 				Attack ( true, 1, 5, 0, 1.0f );
 				PlayEffect ( "fx_chargedflash", barrelJointView, false );
