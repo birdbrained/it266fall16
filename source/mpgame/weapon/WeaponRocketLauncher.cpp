@@ -345,7 +345,7 @@ stateResult_t rvWeaponRocketLauncher::State_Raise ( const stateParms_t& parms ) 
 		// Start the weapon raising
 		case STAGE_INIT:
 			SetStatus ( WP_RISING );
-			PlayAnim( ANIMCHANNEL_LEGS, "raise", 0 );
+			//PlayAnim( ANIMCHANNEL_LEGS, "raise", 0 );
 			return SRESULT_STAGE ( STAGE_WAIT );
 			
 		case STAGE_WAIT:
@@ -378,7 +378,7 @@ stateResult_t rvWeaponRocketLauncher::State_Lower ( const stateParms_t& parms ) 
 	switch ( parms.stage ) {
 		case STAGE_INIT:
 			SetStatus ( WP_LOWERING );
-			PlayAnim ( ANIMCHANNEL_LEGS, "putaway", parms.blendFrames );
+			//PlayAnim ( ANIMCHANNEL_LEGS, "putaway", parms.blendFrames );
 			return SRESULT_STAGE(STAGE_WAIT);
 			
 		case STAGE_WAIT:
@@ -447,12 +447,11 @@ stateResult_t rvWeaponRocketLauncher::State_Fire ( const stateParms_t& parms ) {
 		case STAGE_INIT:
 			nextAttackTime = gameLocal.time + (fireRate * owner->PowerUpModifier ( PMOD_FIRERATE ));		
 			Attack ( false, 1, 200, 0, 1.0f );
-			PlayAnim ( ANIMCHANNEL_LEGS, "fire", parms.blendFrames );	
+			PlayAnim ( ANIMCHANNEL_LEGS, "raise", parms.blendFrames );	
 			return SRESULT_STAGE ( STAGE_WAIT );
 	
 		case STAGE_WAIT:			
 			if ( wsfl.attack && gameLocal.time >= nextAttackTime && ( gameLocal.isClient || AmmoInClip ( ) ) && !wsfl.lowerWeapon ) {
-				SetState ( "Fire", 0 );
 				SetState ( "Fire", 0 );
 				return SRESULT_DONE;
 			}
@@ -483,7 +482,7 @@ stateResult_t rvWeaponRocketLauncher::State_Rocket_Idle ( const stateParms_t& pa
 				PlayAnim( ANIMCHANNEL_TORSO, "idle_empty", parms.blendFrames );
 				idleEmpty = true;
 			} else { 
-				PlayAnim( ANIMCHANNEL_TORSO, "idle", parms.blendFrames );
+				PlayAnim( ANIMCHANNEL_TORSO, "fire", parms.blendFrames );
 			}
 			return SRESULT_STAGE ( STAGE_WAIT );
 		
