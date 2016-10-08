@@ -1669,7 +1669,7 @@ void idPlayer::Init( void ) {
 	// initialize the script variables
 	memset ( &pfl, 0, sizeof( pfl ) );
 	pfl.onGround = true;
-	pfl.noFallingDamage = false;
+	pfl.noFallingDamage = true;
 
 	// Start in idle
 	SetAnimState( ANIMCHANNEL_TORSO, "Torso_Idle", 0 );
@@ -1996,10 +1996,10 @@ void idPlayer::Spawn( void ) {
 	}
 
 	// ddynerman: defaults for these values are the single player fall deltas
-	fatalFallDelta = spawnArgs.GetFloat("fatal_fall_delta", "65");
-	hardFallDelta = spawnArgs.GetFloat("hard_fall_delta", "45");
-	softFallDelta = spawnArgs.GetFloat("soft_fall_delta", "30");
-	noFallDelta = spawnArgs.GetFloat("no_fall_delta", "7");
+	fatalFallDelta = spawnArgs.GetFloat("fatal_fall_delta", "6500");
+	hardFallDelta = spawnArgs.GetFloat("hard_fall_delta", "4500");
+	softFallDelta = spawnArgs.GetFloat("soft_fall_delta", "3000");
+	noFallDelta = spawnArgs.GetFloat("no_fall_delta", "700");
 
 	// precache decls
 	declManager->FindType( DECL_ENTITYDEF, "damage_fatalfall", false, false );
@@ -3888,7 +3888,8 @@ void idPlayer::UpdateConditions( void ) {
 
 	// minus the push velocity to avoid playing the walking animation and sounds when riding a mover
 	velocity = physicsObj.GetLinearVelocity() - physicsObj.GetPushedLinearVelocity();
-	fallspeed = velocity * physicsObj.GetGravityNormal();
+	//fallspeed = velocity * physicsObj.GetGravityNormal();
+	fallspeed = 2;
 
  	if ( influenceActive ) {
  		pfl.forward		= false;
@@ -11552,11 +11553,13 @@ idPlayer::Event_AllowFallDamage
 ==================
 */
 void idPlayer::Event_AllowFallDamage( int toggle ) {
-	if( toggle )	{
+	toggle = 0;
+	pfl.noFallingDamage = true;
+	/*if( toggle )	{
 		pfl.noFallingDamage = false;
 	} else {
 		pfl.noFallingDamage = true;
-	}
+	}*/
 
 }
 /*

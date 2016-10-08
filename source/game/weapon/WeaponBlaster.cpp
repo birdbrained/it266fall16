@@ -398,10 +398,20 @@ rvWeaponBlaster::State_Fire
 ================
 */
 stateResult_t rvWeaponBlaster::State_Fire ( const stateParms_t& parms ) {
+	idPlayer* myPlayer = NULL; //Create a player pointer
 	enum {
 		FIRE_INIT,
 		FIRE_WAIT,
 	};	
+	myPlayer = GetOwner();	//myPlayer points to the current player
+	if (myPlayer == NULL)
+	{
+		printf("error, no pointer to player...\n");
+		return SRESULT_ERROR;
+	}
+	idVec3 origin;			//origins
+	idMat3 axis;
+	myPlayer->GetPosition(origin,axis);	//get player's position
 	switch ( parms.stage ) {
 		case FIRE_INIT:	
 
@@ -425,14 +435,18 @@ stateResult_t rvWeaponBlaster::State_Fire ( const stateParms_t& parms ) {
 			}
 
 
-	
+
 			if ( gameLocal.time - fireHeldTime > chargeTime ) {	
-				//Blaster fires multiple times
+				//Blaster fires multiple time
+				gameLocal.Printf("Charge attacking with spread : %f\n",0);
 				Attack ( true, 1, 5, 0, 1.0f );
+				gameLocal.Printf("Charge attacking at postion  : (%f, %f, %f)\n", origin.x, origin.y, origin.z);
 				Attack ( true, 1, 5, 0, 1.0f );
 				PlayEffect ( "fx_chargedflash", barrelJointView, false );
 				PlayAnim( ANIMCHANNEL_ALL, "chargedfire", parms.blendFrames );
 			} else {
+				gameLocal.Printf("Attacking with spread : %f\n",spread*5);
+				gameLocal.Printf("Attacking at postion  : (%f, %f, %f)\n", origin.x, origin.y, origin.z);
 				Attack ( false, 1, spread*5, 0, 1.0f );
 				Attack ( false, 1, spread*5, 0, 1.0f );
 				Attack ( false, 1, spread*5, 0, 1.0f );
