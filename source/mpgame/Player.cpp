@@ -2351,8 +2351,8 @@ void idPlayer::Save( idSaveGame *savefile ) const {
 
 	savefile->WriteBool( flagCanFire );
 
-	//And mine!
-	savefile->WriteInt( raceCheck );
+	//And mine! ...this might be bad
+	//savefile->WriteInt( raceCheck );
 	
 	// TOSAVE: const idDeclEntityDef*	cachedWeaponDefs [ MAX_WEAPONS ];	// cnicholson: Save these?
 	// TOSAVE: const idDeclEntityDef*	cachedPowerupDefs [ POWERUP_MAX ];
@@ -2631,8 +2631,8 @@ void idPlayer::Restore( idRestoreGame *savefile ) {
 
 	savefile->ReadBool( flagCanFire );
 
-	//And mine!
-	savefile->ReadInt( raceCheck );
+	//And mine! ...this might be bad
+	//savefile->ReadInt( raceCheck );
 
 	// set the pm_ cvars
 	const idKeyValue	*kv;
@@ -4109,14 +4109,23 @@ void idPlayer::FireWeapon( void ) {
 			if ( weapon->AmmoInClip() || weapon->AmmoAvailable() ) {
 				pfl.attackHeld = true;
 				weapon->BeginAttack();
+				//if (raceCheck == 0)
+				//	++raceCheck;
+				//gameLocal.Printf("%c went shooty 1st if\n     raceCheck = %i\n", weapon->GetClassType(), raceCheck);
+				//RemoveWeapon(weapon->);
+				//DropWeapon();
 			} else {
 				pfl.attackHeld = false;
 				pfl.weaponFired = false;
 				StopFiring();
+				//gameLocal.Printf("%c went shooty 1st else\n", weapon->GetClassType());
+				//DropWeapon();
 				NextBestWeapon();
 			}
 		} else {
 			StopFiring();
+			//gameLocal.Printf("%c went shooty 2nd else\n", weapon->GetClassType());
+			//DropWeapon();
 		}
 	}
 	// If reloading when fire is hit cancel the reload
@@ -4132,6 +4141,9 @@ void idPlayer::FireWeapon( void ) {
 		}
 		weaponChangeIconsUp = false;
 	}
+
+	//gameLocal.Printf("%c went shooty\n", weapon->GetClassType());
+	//DropWeapon();
 }
 
 /*

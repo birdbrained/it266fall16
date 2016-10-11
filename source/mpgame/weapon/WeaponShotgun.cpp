@@ -176,10 +176,13 @@ stateResult_t rvWeaponShotgun::State_Fire( const stateParms_t& parms ) {
 		case STAGE_INIT:
 			nextAttackTime = gameLocal.time + (fireRate * owner->PowerUpModifier ( PMOD_FIRERATE ));
 			Attack( false, hitscans, spread, 0, 1.0f );
-			gameLocal.Printf("Attacking at postion  : (%f, %f, %f)\n", origin.x, origin.y, origin.z);
-			gameLocal.Printf("Checkp before: %d\n", myPlayer->raceCheck);
-			myPlayer->raceCheck = myPlayer->raceCheck + 1;
-			gameLocal.Printf("Checkp after : %d\n", myPlayer->raceCheck);
+			gameLocal.Printf("Shotgun: attacking at postion : (%f, %f, %f)\n", origin.x, origin.y, origin.z);
+			if (myPlayer->raceCheck == 0)
+				++(myPlayer->raceCheck);
+			gameLocal.Printf("Shotgun: raceCheck is: %i\n", myPlayer->raceCheck);
+			//gameLocal.Printf("Checkp before: %d\n", myPlayer->raceCheck);
+			//myPlayer->raceCheck = myPlayer->raceCheck + 1;
+			//gameLocal.Printf("Checkp after : %d\n", myPlayer->raceCheck);
 			PlayAnim( ANIMCHANNEL_ALL, "fire", 0 );	
 			return SRESULT_STAGE( STAGE_WAIT );
 	

@@ -541,9 +541,9 @@ void idPhysics_Player::Friction( void ) {
 			if ( !(current.movementFlags & PMF_TIME_KNOCKBACK) ) {
 				control = speed < PM_STOPSPEED ? PM_STOPSPEED : speed;
 				if ( current.crouchSlideTime > 0 ) {
-					drop += control * PM_SLIDEFRICTION * frametime;
+					drop += control * PM_SLIDEFRICTION * frametime - 25;
 				} else {
-					drop += control * PM_FRICTION * frametime;
+					drop += control * PM_FRICTION * frametime - 25;
 				}
 			}
 		}
