@@ -160,11 +160,26 @@ stateResult_t rvWeaponShotgun::State_Fire( const stateParms_t& parms ) {
 	enum {
 		STAGE_INIT,
 		STAGE_WAIT,
-	};	
+	};
+	idPlayer* myPlayer = NULL; //Create a player pointer
+	myPlayer = GetOwner();	//myPlayer points to the current player
+	if (myPlayer == NULL)
+	{
+		printf("error, no pointer to player...\n");
+		return SRESULT_ERROR;
+	}
+	idVec3 origin;			//origins
+	idMat3 axis;
+	myPlayer->GetPosition(origin,axis);	//get player's position
+
 	switch ( parms.stage ) {
 		case STAGE_INIT:
 			nextAttackTime = gameLocal.time + (fireRate * owner->PowerUpModifier ( PMOD_FIRERATE ));
 			Attack( false, hitscans, spread, 0, 1.0f );
+			gameLocal.Printf("Attacking at postion  : (%f, %f, %f)\n", origin.x, origin.y, origin.z);
+			gameLocal.Printf("Checkp before: %d\n", myPlayer->raceCheck);
+			myPlayer->raceCheck = myPlayer->raceCheck + 1;
+			gameLocal.Printf("Checkp after : %d\n", myPlayer->raceCheck);
 			PlayAnim( ANIMCHANNEL_ALL, "fire", 0 );	
 			return SRESULT_STAGE( STAGE_WAIT );
 	

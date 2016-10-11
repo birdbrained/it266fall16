@@ -304,6 +304,10 @@ public:
 
 	int						lastSavingThrowTime;	// for the "free miss" effect
 
+	//And now my variables
+	//Number of racing checkpoints past
+	int raceCheck;
+
 	struct playerFlags_s {
 		bool		forward			:1;
 		bool		backward		:1;

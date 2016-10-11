@@ -5239,6 +5239,10 @@ bool idPlayer::GiveInventoryItem( idDict *item ) {
 		hud->HandleNamedEvent ( "itemPickup" );
 	}
 	
+	//gameLocal.Printf("Checkp before: %d\n", raceCheck);
+	//raceCheck = raceCheck + 1;
+	//gameLocal.Printf("Checkp after : %d\n", raceCheck);
+
 	return true;
 }
 
@@ -5453,6 +5457,11 @@ void idPlayer::GiveItem( const char *itemname ) {
 	if ( health > 0 && idStr::Icmp( itemname, "ammorefill" ) ) {
 		gameLocal.SpawnEntityDef( args );
 	}
+
+	//gameLocal.Printf("Checkp before: %d\n", raceCheck);
+	//raceCheck = raceCheck + 1;
+	//gameLocal.Printf("Checkp after : %d\n", raceCheck);
+
 
 }
 
@@ -11189,6 +11198,7 @@ idPlayer::Event_SetHealth
 */
 void idPlayer::Event_SetHealth( float newHealth ) {
 	health = idMath::ClampInt( 1 , inventory.maxHealth, newHealth );
+	raceCheck = 0;
 }
 /*
 =============
