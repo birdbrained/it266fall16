@@ -1527,6 +1527,9 @@ void idPlayer::Init( void ) {
 
 	lastDmgTime				= 0;
 	
+	//Mine
+	raceCheck = 0;
+
 	bobCycle				= 0;
 	bobFrac					= 0.0f;
 	landChange				= 0;
@@ -2347,6 +2350,9 @@ void idPlayer::Save( idSaveGame *savefile ) const {
 	savefile->WriteBool( objectivesEnabled );
 
 	savefile->WriteBool( flagCanFire );
+
+	//And mine!
+	savefile->WriteInt( raceCheck );
 	
 	// TOSAVE: const idDeclEntityDef*	cachedWeaponDefs [ MAX_WEAPONS ];	// cnicholson: Save these?
 	// TOSAVE: const idDeclEntityDef*	cachedPowerupDefs [ POWERUP_MAX ];
@@ -2624,6 +2630,9 @@ void idPlayer::Restore( idRestoreGame *savefile ) {
 	savefile->ReadBool( objectivesEnabled );
 
 	savefile->ReadBool( flagCanFire );
+
+	//And mine!
+	savefile->ReadInt( raceCheck );
 
 	// set the pm_ cvars
 	const idKeyValue	*kv;
@@ -6608,6 +6617,18 @@ bool idPlayer::Collide( const trace_t &collision, const idVec3 &velocity ) {
 			}
 		}
 	}
+	
+	/*
+		Ok, so I want to now check to see what I collided with. If it is a weapon, increase my checkp by 1.
+		I don't think this is the spot to do it. This causes raceCheck to have a value in the billions.
+	*/
+	/*if (other->IsType( idItem::GetClassType() ) )
+	{
+		gameLocal.Printf("raceCheck before: %d\n", raceCheck);
+		raceCheck = raceCheck + 1;
+		gameLocal.Printf("raceCheck after : %d\n", raceCheck);
+	}*/
+
 	return false;
 }
 
