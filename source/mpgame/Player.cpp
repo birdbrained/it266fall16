@@ -4113,7 +4113,7 @@ void idPlayer::FireWeapon( void ) {
 				//	++raceCheck;
 				//gameLocal.Printf("%c went shooty 1st if\n     raceCheck = %i\n", weapon->GetClassType(), raceCheck);
 				//RemoveWeapon(weapon->);
-				//DropWeapon();
+				//weapon->CleanupWeapon();
 			} else {
 				pfl.attackHeld = false;
 				pfl.weaponFired = false;

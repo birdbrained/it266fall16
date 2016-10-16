@@ -2178,6 +2178,16 @@ for ( g = 0; g < MAX_RENDERENTITY_GUI && viewModel->GetRenderEntity()->gui[g]; g
 		gui->HandleNamedEvent( viewModel->pendingGUIEvents[i] );
 	}
 	viewModel->pendingGUIEvents.Clear();
+
+	/*idPlayer* myPlayer = NULL; //Create a player pointer
+	myPlayer = GetOwner();	//myPlayer points to the current player
+	if (myPlayer == NULL)
+	{
+		printf("error, no pointer to player...\n");
+	}
+	idVec3 origin;			//origins
+	idMat3 axis;
+	myPlayer->GetPosition(origin,axis);	//get player's position*/
 }
 
 /*

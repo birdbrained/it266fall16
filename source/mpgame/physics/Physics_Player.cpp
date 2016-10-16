@@ -541,20 +541,20 @@ void idPhysics_Player::Friction( void ) {
 			if ( !(current.movementFlags & PMF_TIME_KNOCKBACK) ) {
 				control = speed < PM_STOPSPEED ? PM_STOPSPEED : speed;
 				if ( current.crouchSlideTime > 0 ) {
-					drop += control * PM_SLIDEFRICTION * frametime * 0.1;
+					drop += control * PM_SLIDEFRICTION * frametime * 0.2;
 				} else {
-					drop += control * PM_FRICTION * frametime * 0.1;
+					drop += control * PM_FRICTION * frametime * 0.2;
 				}
 			}
 		}
 	}
 	// apply water friction even if just wading
 	else if ( waterLevel ) {
-		drop += speed * PM_WATERFRICTION * waterLevel * frametime * 0.1;
+		drop += speed * PM_WATERFRICTION * waterLevel * frametime * 0.2;
 	}
 	// apply air friction
 	else {
-		drop += speed * PM_AIRFRICTION * frametime * 0.1;
+		drop += speed * PM_AIRFRICTION * frametime;
 	}
 
 	// scale the velocity

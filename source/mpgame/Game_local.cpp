@@ -5405,8 +5405,12 @@ void idGameLocal::SpawnMapEntities( int instance, unsigned short* entityNumIn, u
 			}
 
 			idEntity* ent = NULL;
+
+			// Look at this
+
+
 			SpawnEntityDef( args, &ent );
-			//common->Printf( "pop: spawn map ent %d at %d ( %s )\n", i, ent->entityNumber, args.GetString( "name" ) );
+			common->Printf( "pop: spawn map ent %d at %d ( %s )\n", i, ent->entityNumber, args.GetString( "name" ) );
 	
 			if ( ent && entityNumOut ) {
 				entityNumOut[ i ] = ent->entityNumber;
