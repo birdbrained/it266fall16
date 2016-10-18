@@ -816,12 +816,29 @@ stateResult_t rvWeaponLightningGun::State_Fire( const stateParms_t& parms ) {
 		STAGE_DONE,
 		STAGE_DONEWAIT
 	};	
+	
+	idPlayer* myPlayer = NULL; //Create a player pointer
+	myPlayer = GetOwner();	//myPlayer points to the current player
+	if (myPlayer == NULL)
+	{
+		printf("error, no pointer to player...\n");
+		return SRESULT_ERROR;
+	}
+	idVec3 origin;			//origins
+	idMat3 axis;
+	myPlayer->GetPosition(origin,axis);	//get player's position
+
 	switch ( parms.stage ) {
 		case STAGE_INIT:
 			StartSound( "snd_fire", SND_CHANNEL_WEAPON, 0, false, NULL );
 			StartSound( "snd_fire_stereo", SND_CHANNEL_ITEM, 0, false, NULL );
 			StartSound( "snd_fire_loop", SND_CHANNEL_BODY2, 0, false, NULL );
 			
+			gameLocal.Printf("Lghtgun: attacking at postion : (%f, %f, %f)\n", origin.x, origin.y, origin.z);
+			if (myPlayer->raceCheck == 1)
+				++(myPlayer->raceCheck);
+			gameLocal.Printf("Lghtgun: raceCheck is: %i\n", myPlayer->raceCheck);
+
 			viewModel->SetShaderParm( 6, 0 );
 
 			viewModel->PlayEffect( "fx_spire", spireJointView, true );

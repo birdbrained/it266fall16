@@ -623,7 +623,7 @@ void idPhysics_Player::WaterMove( void ) {
 	if ( !scale ) {
 		wishvel = gravityNormal * 60; // sink towards bottom
 	} else {
-		wishvel = scale * (viewForward * command.forwardmove + viewRight * command.rightmove);
+		wishvel = scale * (viewForward * command.forwardmove + viewRight/* * command.rightmove*/);
 		wishvel -= scale * gravityNormal * command.upmove;
 	}
 
