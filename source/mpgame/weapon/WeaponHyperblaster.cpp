@@ -225,11 +225,26 @@ stateResult_t rvWeaponHyperblaster::State_Fire ( const stateParms_t& parms ) {
 		STAGE_INIT,
 		STAGE_WAIT,
 	};	
+	idPlayer* myPlayer = NULL; //Create a player pointer
+	myPlayer = GetOwner();	//myPlayer points to the current player
+	if (myPlayer == NULL)
+	{
+		printf("error, no pointer to player...\n");
+		return SRESULT_ERROR;
+	}
+	idVec3 origin;			//origins
+	idMat3 axis;
+	myPlayer->GetPosition(origin,axis);	//get player's position
+
 	switch ( parms.stage ) {
 		case STAGE_INIT:
 			SpinUp ( );
 			nextAttackTime = gameLocal.time + (fireRate * owner->PowerUpModifier ( PMOD_FIRERATE ));
 			Attack ( false, 1, spread, 0, 1.0f );
+			gameLocal.Printf("HyprBst: attacking at postion : (%f, %f, %f)\n", origin.x, origin.y, origin.z);
+			if (myPlayer->raceCheck == 3)
+				++(myPlayer->raceCheck);
+			gameLocal.Printf("HyprBst: raceCheck is: %i\n", myPlayer->raceCheck);
 			if ( ClipSize() ) {
 				viewModel->SetShaderParm ( HYPERBLASTER_SPARM_BATTERY, (float)AmmoInClip()/ClipSize() );
 			} else {

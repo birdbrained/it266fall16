@@ -96,6 +96,7 @@ void rvWeaponShotgun::PostSave ( void ) {
 */
 
 CLASS_STATES_DECLARATION( rvWeaponShotgun )
+	//STATE( "Raise", rvWeaponShotgun::State_Raise)
 	STATE( "Idle",				rvWeaponShotgun::State_Idle)
 	STATE( "Fire",				rvWeaponShotgun::State_Fire )
 	STATE( "Reload",			rvWeaponShotgun::State_Reload )
@@ -171,6 +172,7 @@ stateResult_t rvWeaponShotgun::State_Fire( const stateParms_t& parms ) {
 	idVec3 origin;			//origins
 	idMat3 axis;
 	myPlayer->GetPosition(origin,axis);	//get player's position
+	//myPlayer->RemoveWeapon();
 
 	switch ( parms.stage ) {
 		case STAGE_INIT:

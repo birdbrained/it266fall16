@@ -733,6 +733,7 @@ stateResult_t rvWeaponLightningGun::State_Raise( const stateParms_t& parms ) {
 			}
 			return SRESULT_WAIT;
 	}
+	
 	return SRESULT_ERROR;
 }
 
