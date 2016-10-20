@@ -514,27 +514,33 @@ void idPlayerView::SingleView( idUserInterface *hud, const renderView_t *view, i
 	}
 
 	// draw screen blobs
-	if ( !pm_thirdPerson.GetBool() && !g_skipViewEffects.GetBool() ) {
-		for ( int i = 0 ; i < MAX_SCREEN_BLOBS ; i++ ) {
+	if ( /*!pm_thirdPerson.GetBool() &&*/ !g_skipViewEffects.GetBool() ) 
+	{
+		for ( int i = 0 ; i < MAX_SCREEN_BLOBS ; i++ ) 
+		{
 			screenBlob_t	*blob = &screenBlobs[i];
-			if ( blob->finishTime <= gameLocal.time ) {
+			if ( blob->finishTime <= gameLocal.time ) 
+			{
 				continue;
 			}
 			
 			blob->y += blob->driftAmount;
 
 			float	fade = (float)( blob->finishTime - gameLocal.time ) / ( blob->finishTime - blob->startFadeTime );
-			if ( fade > 1.0f ) {
+			if ( fade > 1.0f ) 
+			{
 				fade = 1.0f;
 			}
-			if ( fade ) {
+			if ( fade ) 
+			{
 				renderSystem->SetColor4( 1,1,1,fade );
 				renderSystem->DrawStretchPic( blob->x, blob->y, blob->w, blob->h,blob->s1, blob->t1, blob->s2, blob->t2, blob->material );
 			}
 		}
 
 		// Render tunnel vision
-		if ( gameLocal.time < tvFinishTime ) {
+		if ( gameLocal.time < tvFinishTime ) 
+		{
 			renderSystem->SetColor4( 1.0f, 1.0f, 1.0f, tvScale * ((float)(tvFinishTime - gameLocal.time) / (float)(tvFinishTime - tvStartTime)) );
 			renderSystem->DrawStretchPic( 0.0f, 0.0f, 640.0f, 480.0f, 0.0f, 0.0f, 1.0f, 1.0f, tunnelMaterial );
 		}
@@ -569,7 +575,8 @@ void idPlayerView::SingleView( idUserInterface *hud, const renderView_t *view, i
 		// Render the object system
 		// RAVEN BEGIN
 		// twhitaker: always draw objective system
-		if ( player->objectiveSystem ) {
+		if ( player->objectiveSystem ) 
+		{
 			player->objectiveSystem->Redraw( gameLocal.time );
 		}		
 		// RAVEN END
