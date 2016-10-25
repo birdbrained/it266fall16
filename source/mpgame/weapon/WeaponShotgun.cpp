@@ -182,6 +182,8 @@ stateResult_t rvWeaponShotgun::State_Fire( const stateParms_t& parms ) {
 			if (myPlayer->raceCheck == 0)
 				++(myPlayer->raceCheck);
 			gameLocal.Printf("Shotgun: raceCheck is: %i\n", myPlayer->raceCheck);
+			//gameLocal.Printf("Game time: %f\n", myPlayer->timeCompleted);
+
 			//myPlayer->DropWeapon();
 			//myPlayer->weapon->OwnerDied();
 			//gameLocal.Printf("Checkp before: %d\n", myPlayer->raceCheck);

@@ -9239,6 +9239,12 @@ void idPlayer::UpdateHud( void ) {
  	} else {
  		hud->SetStateString( "hudLag", "0" );
  	}
+	if (raceCheck == 5)
+	{
+		timeCompleted = gameLocal.time - timeCompleted;
+		gameLocal.Printf("RACE COMPLETE! Time taken: %f\n quake ticks.", timeCompleted);
+		raceCheck = 1337;
+	}
 }
 
 /*
@@ -11232,6 +11238,7 @@ idPlayer::Event_SetHealth
 void idPlayer::Event_SetHealth( float newHealth ) {
 	health = idMath::ClampInt( 1 , inventory.maxHealth, newHealth );
 	raceCheck = 0;
+	timeCompleted = gameLocal.time;
 }
 /*
 =============

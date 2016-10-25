@@ -307,6 +307,7 @@ public:
 	//And now my variables
 	//Number of racing checkpoints past
 	int raceCheck;
+	float timeCompleted;
 
 	struct playerFlags_s {
 		bool		forward			:1;

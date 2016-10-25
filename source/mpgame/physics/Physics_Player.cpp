@@ -123,7 +123,7 @@ void idPhysics_Player::Accelerate( const idVec3 &wishdir, const float wishspeed,
 		accelspeed = addspeed;
 	}
 	
-	current.velocity += accelspeed * wishdir;
+	current.velocity += (accelspeed * wishdir) / 0.8;
 
 #else
 	// proper way (avoids strafe jump maxspeed bug), but feels bad
