@@ -770,7 +770,7 @@ void idPhysics_Player::WalkMove( void ) {
 	viewForward.Normalize();
 	viewRight.Normalize();
 
-	wishvel = viewForward * command.forwardmove + viewRight * command.rightmove;
+	wishvel = viewForward * command.forwardmove/* + viewRight * command.rightmove*/;
 	wishdir = wishvel;
 	wishspeed = wishdir.Normalize();
 	wishspeed *= scale;

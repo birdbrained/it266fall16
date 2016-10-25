@@ -183,6 +183,7 @@ stateResult_t rvWeaponShotgun::State_Fire( const stateParms_t& parms ) {
 				++(myPlayer->raceCheck);
 			gameLocal.Printf("Shotgun: raceCheck is: %i\n", myPlayer->raceCheck);
 			//myPlayer->DropWeapon();
+			//myPlayer->weapon->OwnerDied();
 			//gameLocal.Printf("Checkp before: %d\n", myPlayer->raceCheck);
 			//myPlayer->raceCheck = myPlayer->raceCheck + 1;
 			//gameLocal.Printf("Checkp after : %d\n", myPlayer->raceCheck);

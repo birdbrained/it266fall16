@@ -514,6 +514,9 @@ void idPlayerView::SingleView( idUserInterface *hud, const renderView_t *view, i
 	}
 
 	// draw screen blobs
+	/* THIS SEEMS IMPORTANT.
+========================================================
+	*/
 	if ( /*!pm_thirdPerson.GetBool() &&*/ !g_skipViewEffects.GetBool() ) 
 	{
 		for ( int i = 0 ; i < MAX_SCREEN_BLOBS ; i++ ) 
@@ -544,9 +547,20 @@ void idPlayerView::SingleView( idUserInterface *hud, const renderView_t *view, i
 			renderSystem->SetColor4( 1.0f, 1.0f, 1.0f, tvScale * ((float)(tvFinishTime - gameLocal.time) / (float)(tvFinishTime - tvStartTime)) );
 			renderSystem->DrawStretchPic( 0.0f, 0.0f, 640.0f, 480.0f, 0.0f, 0.0f, 1.0f, 1.0f, tunnelMaterial );
 		}
+		
+		/*screenBlob_t	*blob = &screenBlobs[0];
+		blob->y += blob->driftAmount;
+		float	fade = (float)( blob->finishTime - gameLocal.time ) / ( blob->finishTime - blob->startFadeTime );
+		renderSystem->SetColor4( 1,1,1,fade );
+		renderSystem->DrawStretchPic( blob->x+20, blob->y, blob->w, blob->h,blob->s1, blob->t1, blob->s2, blob->t2, blob->material );*/
+
 
 		player->DrawHUD( hud );
-
+		
+		/*float health = player->health;
+		float alpha = health / 100.0f;
+		renderSystem->SetColor4( ( player->health <= 0.0f ) ? MS2SEC( gameLocal.time ) : lastDamageTime, 1.0f, 1.0f, ( player->health <= 0.0f ) ? 0.0f : alpha );
+		renderSystem->DrawStretchPic( 0.0f, 0.0f, 640.0f, 480.0f, 0.0f, 0.0f, 1.0f, 1.0f, tunnelMaterial );*/
 			
 /*
 		// tunnel vision
@@ -783,6 +797,7 @@ void idPlayerView::RenderPlayerView( idUserInterface *hud ) {
 	if ( net_clientLagOMeter.GetBool() && gameLocal.isClient && !( gameLocal.GetDemoState() == DEMO_PLAYING && ( gameLocal.IsServerDemoPlaying() || gameLocal.IsTimeDemo() ) ) ) {
 		gameLocal.lagometer.Draw();
 	}
+	//gameLocal.lagometer.Draw();
 }
 
 // RAVEN END
