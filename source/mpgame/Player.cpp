@@ -9239,12 +9239,50 @@ void idPlayer::UpdateHud( void ) {
  	} else {
  		hud->SetStateString( "hudLag", "0" );
  	}
-	if (raceCheck == 5)
+
+	switch (raceCheck)
+	{
+	case 0:
+		GUIMainNotice("Checkpoint: 0 / 5", true);
+		GUIFragNotice("--Go fire a shotgun!--", true);
+		break;
+	case 1:
+		GUIMainNotice("Checkpoint: 1 / 5", true);
+		GUIFragNotice("--Go fire a lightning gun!--", true);
+		break;
+	case 2:
+		GUIMainNotice("Checkpoint: 2 / 5", true);
+		GUIFragNotice("--Go fire a grenade launcher!--", true);
+		break;
+	case 3:
+		GUIMainNotice("Checkpoint: 3 / 5", true);
+		GUIFragNotice("--Go fire a HyperBlaster!--", true);
+		break;
+	case 4:
+		GUIMainNotice("Checkpoint: 4 / 5", true);
+		GUIFragNotice("--Go fire a rocket launcher!--", true);
+		break;
+	case 5:
+		GUIMainNotice("Checkpoint: 5 / 5", true);
+		GUIFragNotice("RACE COMPLETE!", true);
+		break;
+	default:
+		GUIMainNotice("Checkpoint: ? / 5", true);
+		GUIFragNotice("Something fucked up.", true);
+		break;
+	}
+
+	/*if (raceCheck == 5)
 	{
 		timeCompleted = gameLocal.time - timeCompleted;
-		gameLocal.Printf("RACE COMPLETE! Time taken: %f\n quake ticks.", timeCompleted);
+		gameLocal.Printf("RACE COMPLETE! Time taken: %f quake ticks.\n", timeCompleted);
 		raceCheck = 1337;
-	}
+		gameLocal.KillBox(this);
+		GUIMainNotice("hello", true);
+		GUIFragNotice(" ", true);
+		
+		//hud->SetStateFloat("Time taken %f\n: ", timeCompleted);
+	}*/
 }
 
 /*
