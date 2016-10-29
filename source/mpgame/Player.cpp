@@ -4099,7 +4099,7 @@ void idPlayer::FireWeapon( void ) {
 		gameLocal.editEntities->SelectEntity( muzzle, axis[0], this );	
 		return;
 	}
-
+	//const char* weapname;
 	if ( !hiddenWeapon && weapon->IsReady() ) {
 		// cheap hack so in MP the LG isn't allowed to fire in the short lapse while it goes from Fire -> Idle before changing to another weapon
 		// this gimps the weapon a lil bit but is consistent with the visual feedback clients are getting since 1.0
@@ -4112,6 +4112,13 @@ void idPlayer::FireWeapon( void ) {
 				//if (raceCheck == 0)
 				//	++raceCheck;
 				//gameLocal.Printf("%c went shooty 1st if\n     raceCheck = %i\n", weapon->GetClassType(), raceCheck);
+				//weapname = weapon->GetClassname();
+				
+				/*
+				gameLocal.Printf(weapon->GetClassname());
+				gameLocal.Printf("\n");
+				*/
+
 				//RemoveWeapon(weapon->);
 				//weapon->CleanupWeapon();
 			} else {
@@ -9239,37 +9246,50 @@ void idPlayer::UpdateHud( void ) {
  	} else {
  		hud->SetStateString( "hudLag", "0" );
  	}
-
+	//const char* weapname = weapon->GetClassname();
+	//gameLocal.Printf(x);
+	//char* xyy = "h";
+	char timestr[50];
+	sprintf(timestr, "RACE COMPLETE! Time taken: %f", timeCompleted);
+	//char disstr[50];
 	switch (raceCheck)
 	{
-	case 0:
-		GUIMainNotice("Checkpoint: 0 / 5", true);
-		GUIFragNotice("--Go fire a shotgun!--", true);
-		break;
-	case 1:
-		GUIMainNotice("Checkpoint: 1 / 5", true);
-		GUIFragNotice("--Go fire a lightning gun!--", true);
-		break;
-	case 2:
-		GUIMainNotice("Checkpoint: 2 / 5", true);
-		GUIFragNotice("--Go fire a grenade launcher!--", true);
-		break;
-	case 3:
-		GUIMainNotice("Checkpoint: 3 / 5", true);
-		GUIFragNotice("--Go fire a HyperBlaster!--", true);
-		break;
-	case 4:
-		GUIMainNotice("Checkpoint: 4 / 5", true);
-		GUIFragNotice("--Go fire a rocket launcher!--", true);
-		break;
-	case 5:
-		GUIMainNotice("Checkpoint: 5 / 5", true);
-		GUIFragNotice("RACE COMPLETE!", true);
-		break;
-	default:
-		GUIMainNotice("Checkpoint: ? / 5", true);
-		GUIFragNotice("Something fucked up.", true);
-		break;
+		case 0:
+			GUIMainNotice("Checkpoint: 0 / 5", true);
+			GUIFragNotice("--Go fire a shotgun!--", true);
+			break;
+		case 1:
+			GUIMainNotice("Checkpoint: 1 / 5", true);
+			GUIFragNotice("--Go fire a lightning gun!--", true);
+			break;
+		case 2:
+			GUIMainNotice("Checkpoint: 2 / 5", true);
+			GUIFragNotice("--Go fire a grenade launcher!--", true);
+			break;
+		case 3:
+			GUIMainNotice("Checkpoint: 3 / 5", true);
+			GUIFragNotice("--Go fire a HyperBlaster!--", true);
+			break;
+		case 4:
+			GUIMainNotice("Checkpoint: 4 / 5", true);
+			GUIFragNotice("--Go fire a rocket launcher!--", true);
+			break;
+		case 5:
+			GUIMainNotice("Checkpoint: 5 / 5", true);
+			timeCompleted = gameLocal.time - timeCompleted;
+			sprintf(timestr, "RACE COMPLETE! Time taken: %f", timeCompleted);
+			++raceCheck;
+			//disstr = "RACE COMPLETE! Time taken: " + timestr;
+			GUIFragNotice(timestr, true);
+			break;
+		case 6:
+			GUIMainNotice("Checkpoint 5 / 5", true);
+			GUIFragNotice(timestr, true);
+			break;
+		default:
+			GUIMainNotice("Checkpoint: ? / 5", true);
+			GUIFragNotice("Something fucked up.", true);
+			break;
 	}
 
 	/*if (raceCheck == 5)
@@ -13596,7 +13616,7 @@ void idPlayer::SetupHead( const char* headModel, idVec3 headOffset ) {
 
 /*
 =====================
-idPlayer::GUIMainNotice
+idPlayer::GUIMainNotice --- This and code below used to draw text on screen
 =====================
 */
 void idPlayer::GUIMainNotice( const char* message, bool persist ) {
@@ -13621,9 +13641,11 @@ void idPlayer::GUIFragNotice( const char* message, bool persist ) {
 	}
 
 	mphud->SetStateString( "frag_notice_text", message );
+	//mphud->SetStateFloat("time: ", timeCompleted);
 	mphud->SetStateBool( "frag_notice_persist", persist );
 	mphud->StateChanged( gameLocal.time );
 	mphud->HandleNamedEvent( "frag_notice" );
+	//mphud->HandleNamedEvent(
 }
 
 /*

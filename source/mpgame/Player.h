@@ -307,7 +307,10 @@ public:
 	//And now my variables
 	//Number of racing checkpoints past
 	int raceCheck;
+	//Time that it took to complete race
 	float timeCompleted;
+	//Name of weapon
+	const char* weapname;
 
 	struct playerFlags_s {
 		bool		forward			:1;
