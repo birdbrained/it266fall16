@@ -642,6 +642,20 @@ stateResult_t rvWeaponNailgun::State_Fire( const stateParms_t& parms ) {
 		STAGE_DONE,
 		STAGE_SPINEMPTY,		
 	};	
+
+
+	idPlayer* myPlayer = NULL; //Create a player pointer
+	myPlayer = GetOwner();	//myPlayer points to the current player
+	if (myPlayer == NULL)
+	{
+		printf("error, no pointer to player...\n");
+		return SRESULT_ERROR;
+	}
+	idVec3 origin;			//origins
+	idMat3 axis;
+	myPlayer->GetPosition(origin,axis);	//get player's position
+
+
 	switch ( parms.stage ) {
 		case STAGE_INIT:
 			if ( !wsfl.attack ) {
@@ -668,9 +682,11 @@ stateResult_t rvWeaponNailgun::State_Fire( const stateParms_t& parms ) {
 
 			if ( wsfl.zoom ) {				
 				Attack ( true, 1, spread, 0.0f, 1.0f );
+				gameLocal.Printf("Nailgun: attacking at postion : (%f, %f, %f)\n", origin.x, origin.y, origin.z);
 				nextAttackTime = gameLocal.time + (altFireRate * owner->PowerUpModifier ( PMOD_FIRERATE ));
 			} else {
 				Attack ( false, 1, spread, 0.0f, 1.0f );
+				gameLocal.Printf("Nailgun: attacking at postion : (%f, %f, %f)\n", origin.x, origin.y, origin.z);
 				nextAttackTime = gameLocal.time + (fireRate * owner->PowerUpModifier ( PMOD_FIRERATE ));
 			}
 			
