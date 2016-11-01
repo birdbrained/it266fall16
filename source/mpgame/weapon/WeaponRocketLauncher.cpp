@@ -460,9 +460,9 @@ stateResult_t rvWeaponRocketLauncher::State_Fire ( const stateParms_t& parms ) {
 			Attack ( false, 1, 200, 0, 1.0f );
 
 			gameLocal.Printf("RktLuch: attacking at postion : (%f, %f, %f)\n", origin.x, origin.y, origin.z);
-			if (myPlayer->raceCheck == 4)
+			/*if (myPlayer->raceCheck == 4)
 				++(myPlayer->raceCheck);
-			gameLocal.Printf("RktLuch: raceCheck is: %i\n", myPlayer->raceCheck);
+			gameLocal.Printf("RktLuch: raceCheck is: %i\n", myPlayer->raceCheck);*/
 
 			PlayAnim ( ANIMCHANNEL_LEGS, "raise", parms.blendFrames );	
 			return SRESULT_STAGE ( STAGE_WAIT );

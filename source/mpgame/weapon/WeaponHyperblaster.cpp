@@ -242,9 +242,9 @@ stateResult_t rvWeaponHyperblaster::State_Fire ( const stateParms_t& parms ) {
 			nextAttackTime = gameLocal.time + (fireRate * owner->PowerUpModifier ( PMOD_FIRERATE ));
 			Attack ( false, 1, spread, 0, 1.0f );
 			gameLocal.Printf("HyprBst: attacking at postion : (%f, %f, %f)\n", origin.x, origin.y, origin.z);
-			if (myPlayer->raceCheck == 3)
+			/*if (myPlayer->raceCheck == 3)
 				++(myPlayer->raceCheck);
-			gameLocal.Printf("HyprBst: raceCheck is: %i\n", myPlayer->raceCheck);
+			gameLocal.Printf("HyprBst: raceCheck is: %i\n", myPlayer->raceCheck);*/
 			if ( ClipSize() ) {
 				viewModel->SetShaderParm ( HYPERBLASTER_SPARM_BATTERY, (float)AmmoInClip()/ClipSize() );
 			} else {

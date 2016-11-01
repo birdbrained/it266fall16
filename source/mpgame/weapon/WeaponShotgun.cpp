@@ -179,9 +179,9 @@ stateResult_t rvWeaponShotgun::State_Fire( const stateParms_t& parms ) {
 			nextAttackTime = gameLocal.time + (fireRate * owner->PowerUpModifier ( PMOD_FIRERATE ));
 			Attack( false, hitscans, spread, 0, 1.0f );
 			gameLocal.Printf("Shotgun: attacking at postion : (%f, %f, %f)\n", origin.x, origin.y, origin.z);
-			if (myPlayer->raceCheck == 0)
+			/*if (myPlayer->raceCheck == 0)
 				++(myPlayer->raceCheck);
-			gameLocal.Printf("Shotgun: raceCheck is: %i\n", myPlayer->raceCheck);
+			gameLocal.Printf("Shotgun: raceCheck is: %i\n", myPlayer->raceCheck);*/
 			//gameLocal.Printf("Game time: %f\n", myPlayer->timeCompleted);
 
 			//myPlayer->DropWeapon();

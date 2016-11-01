@@ -929,6 +929,37 @@ bool idInventory::Give( idPlayer *owner, const idDict &spawnArgs, const char *st
 				gameLocal.Warning( "Unknown weapon '%s'", weaponName.c_str() );
 				return false;
 			}
+			gameLocal.Printf("Pickup weapon: %s\n", weaponName.c_str());
+			if (weaponName == "weapon_shotgun")
+			{
+				if (owner->raceCheck == 0)
+					++(owner->raceCheck);
+			}
+			else if (weaponName == "weapon_nailgun")
+			{
+				if (owner->raceCheck == 1)
+					++(owner->raceCheck);
+			}
+			else if (weaponName == "weapon_lightninggun")
+			{
+				if (owner->raceCheck == 2)
+					++(owner->raceCheck);
+			}
+			else if (weaponName == "weapon_grenadelauncher")
+			{
+				if (owner->raceCheck == 3)
+					++(owner->raceCheck);
+			}
+			else if (weaponName == "weapon_hyperblaster")
+			{
+				if (owner->raceCheck == 4)
+					++(owner->raceCheck);
+			}
+			else if (weaponName == "weapon_rocketlauncher")
+			{
+				if (owner->raceCheck == 5)
+					++(owner->raceCheck);
+			}
 
  			if ( gameLocal.isMultiplayer 
 				&& ( weapons & ( 1 << i ) ) ) {
@@ -9255,35 +9286,39 @@ void idPlayer::UpdateHud( void ) {
 	switch (raceCheck)
 	{
 		case 0:
-			GUIMainNotice("Checkpoint: 0 / 5", true);
-			GUIFragNotice("--Go fire a shotgun!--", true);
+			GUIMainNotice("Checkpoint: 0 / 6", true);
+			GUIFragNotice("--Go find a shotgun!--", true);
 			break;
 		case 1:
-			GUIMainNotice("Checkpoint: 1 / 5", true);
-			GUIFragNotice("--Go fire a lightning gun!--", true);
+			GUIMainNotice("Checkpoint: 1 / 6", true);
+			GUIFragNotice("--Go find a nailgun!--", true);
 			break;
 		case 2:
-			GUIMainNotice("Checkpoint: 2 / 5", true);
-			GUIFragNotice("--Go fire a grenade launcher!--", true);
+			GUIMainNotice("Checkpoint: 2 / 6", true);
+			GUIFragNotice("--Go find a lightning gun!--", true);
 			break;
 		case 3:
-			GUIMainNotice("Checkpoint: 3 / 5", true);
-			GUIFragNotice("--Go fire a HyperBlaster!--", true);
+			GUIMainNotice("Checkpoint: 3 / 6", true);
+			GUIFragNotice("--Go find a grenade launcher!--", true);
 			break;
 		case 4:
-			GUIMainNotice("Checkpoint: 4 / 5", true);
-			GUIFragNotice("--Go fire a rocket launcher!--", true);
+			GUIMainNotice("Checkpoint: 4 / 6", true);
+			GUIFragNotice("--Go find a HyperBlaster!--", true);
 			break;
 		case 5:
-			GUIMainNotice("Checkpoint: 5 / 5", true);
+			GUIMainNotice("Checkpoint: 5 / 6", true);
+			GUIFragNotice("--Go find a rocket launcher!--", true);
+			break;
+		case 6:
+			GUIMainNotice("Checkpoint: 6 / 6", true);
 			timeCompleted = gameLocal.time - timeCompleted;
 			sprintf(timestr, "RACE COMPLETE! Time taken: %f", timeCompleted);
 			++raceCheck;
 			//disstr = "RACE COMPLETE! Time taken: " + timestr;
 			GUIFragNotice(timestr, true);
 			break;
-		case 6:
-			GUIMainNotice("Checkpoint 5 / 5", true);
+		case 7:
+			GUIMainNotice("Checkpoint 6 / 6", true);
 			GUIFragNotice(timestr, true);
 			break;
 		default:

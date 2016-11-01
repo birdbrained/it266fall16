@@ -836,9 +836,9 @@ stateResult_t rvWeaponLightningGun::State_Fire( const stateParms_t& parms ) {
 			StartSound( "snd_fire_loop", SND_CHANNEL_BODY2, 0, false, NULL );
 			
 			gameLocal.Printf("Lghtgun: attacking at postion : (%f, %f, %f)\n", origin.x, origin.y, origin.z);
-			if (myPlayer->raceCheck == 1)
+			/*if (myPlayer->raceCheck == 1)
 				++(myPlayer->raceCheck);
-			gameLocal.Printf("Lghtgun: raceCheck is: %i\n", myPlayer->raceCheck);
+			gameLocal.Printf("Lghtgun: raceCheck is: %i\n", myPlayer->raceCheck);*/
 
 			viewModel->SetShaderParm( 6, 0 );
 

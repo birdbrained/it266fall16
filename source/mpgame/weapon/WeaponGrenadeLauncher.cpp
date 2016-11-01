@@ -158,9 +158,9 @@ stateResult_t rvWeaponGrenadeLauncher::State_Fire ( const stateParms_t& parms ) 
 			nextAttackTime = gameLocal.time + (fireRate * owner->PowerUpModifier ( PMOD_FIRERATE ));
 			Attack ( false, 1, spread, 0, 1.0f );
 			gameLocal.Printf("GrenLnh: attacking at postion : (%f, %f, %f)\n", origin.x, origin.y, origin.z);
-			if (myPlayer->raceCheck == 2)
+			/*if (myPlayer->raceCheck == 2)
 				++(myPlayer->raceCheck);
-			gameLocal.Printf("GrenLnh: raceCheck is: %i\n", myPlayer->raceCheck);
+			gameLocal.Printf("GrenLnh: raceCheck is: %i\n", myPlayer->raceCheck);*/
 			PlayAnim ( ANIMCHANNEL_ALL, GetFireAnim(), 0 );	
 			return SRESULT_STAGE ( STAGE_WAIT );
 	
