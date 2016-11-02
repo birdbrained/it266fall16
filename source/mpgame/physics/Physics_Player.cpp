@@ -114,7 +114,7 @@ void idPhysics_Player::Accelerate( const idVec3 &wishdir, const float wishspeed,
 // RAVEN BEGIN
 // nmckenzie: added ability to try alternate accelerations.
 	if ( pm_acceloverride.GetFloat() > 0.0f ) {
-		accelspeed = pm_acceloverride.GetFloat() * frametime * wishspeed;
+		accelspeed = pm_acceloverride.GetFloat() * frametime * wishspeed / 2;
 	} else {
 		accelspeed = accel * frametime * wishspeed;
 	}
@@ -123,7 +123,7 @@ void idPhysics_Player::Accelerate( const idVec3 &wishdir, const float wishspeed,
 		accelspeed = addspeed;
 	}
 	
-	current.velocity += (accelspeed * wishdir) / 0.8;
+	current.velocity += (accelspeed * wishdir);
 
 #else
 	// proper way (avoids strafe jump maxspeed bug), but feels bad

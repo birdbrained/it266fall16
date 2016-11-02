@@ -9280,7 +9280,7 @@ void idPlayer::UpdateHud( void ) {
 	//const char* weapname = weapon->GetClassname();
 	//gameLocal.Printf(x);
 	//char* xyy = "h";
-	char timestr[50];
+	char timestr[60];
 	sprintf(timestr, "RACE COMPLETE! Time taken: %f", timeCompleted);
 	//char disstr[50];
 	switch (raceCheck)
@@ -9322,7 +9322,7 @@ void idPlayer::UpdateHud( void ) {
 			GUIFragNotice(timestr, true);
 			break;
 		default:
-			GUIMainNotice("Checkpoint: ? / 5", true);
+			GUIMainNotice("Checkpoint: ? / 6", true);
 			GUIFragNotice("Something fucked up.", true);
 			break;
 	}
